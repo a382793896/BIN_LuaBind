@@ -30,6 +30,11 @@ namespace bin
 
 			return 1;
 		}
+		DEFINE_CLASS_FUNCTION(test,void,())
+		{
+			printf( "test func");
+			return 1;
+		}
 	END_SCRIPT_CLASS()
 }
 
@@ -98,7 +103,7 @@ void CExample_Handle::Do()
 		std::string udValue;
 		tbl.Get("a", tblValue);
 		ud.CallMemFunc("name", udValue);
-
+		ud.CallMemFunc("test",RET_VOID);
 		printf("Get tableValue[%s] userdataValue[%s]\n", tblValue.c_str(), udValue.c_str());
 	}
 	// set

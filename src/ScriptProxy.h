@@ -4,7 +4,7 @@
 
 namespace bin
 {
-	struct SScriptObjectRef : INonCopyable
+	struct LUA_BIND_API SScriptObjectRef : INonCopyable
 	{
 		struct SScriptObject*	pObject;
 		lua_State*				pLua;
@@ -32,7 +32,7 @@ namespace bin
 		void OnChangeWeakedTo(bool bWeaked);
 	};
 
-	struct SScriptObject
+	struct LUA_BIND_API SScriptObject
 	{
 		SScriptObject()
 			: m_pObjRef(NULL)
@@ -60,10 +60,11 @@ namespace bin
 			
 		}
 
-		SScriptObject& operator = (const SScriptObject& r)
-		{
-			// Copy nothing about script part
-		}
+		//SScriptObject& operator = (const SScriptObject& r)
+		//{
+		//	// Copy nothing about script part
+		//	return *this;
+		//}
 
 		// Internal used, Attach this object to lua object
 		template <typename T>

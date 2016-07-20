@@ -26,31 +26,32 @@ namespace bin
 
 		m_bOwn = true;
 
-		{
-			lua_State* L = m_pLua;
+		{/*
+		 lua_State* L = m_pLua;
 
-			const luaL_Reg loadedlibs[] = 
-			{
-				{"_G",				luaopen_base},
-				{LUA_LOADLIBNAME,	luaopen_package},
-				{LUA_COLIBNAME,		luaopen_coroutine},
-				{LUA_TABLIBNAME,	luaopen_table},
-				{LUA_IOLIBNAME,		luaopen_io},
-				{LUA_OSLIBNAME,		luaopen_os},
-				{LUA_STRLIBNAME,	luaopen_string},
-				{LUA_MATHLIBNAME,	luaopen_math},
-#if defined _DEBUG
-				{LUA_DBLIBNAME,		luaopen_debug},
-#endif
-				{NULL, NULL}
-			};
+		 const luaL_Reg loadedlibs[] = 
+		 {
+		 {"_G",				luaopen_base},
+		 {LUA_LOADLIBNAME,	luaopen_package},
+		 {LUA_COLIBNAME,		luaopen_coroutine},
+		 {LUA_TABLIBNAME,	luaopen_table},
+		 {LUA_IOLIBNAME,		luaopen_io},
+		 {LUA_OSLIBNAME,		luaopen_os},
+		 {LUA_STRLIBNAME,	luaopen_string},
+		 {LUA_MATHLIBNAME,	luaopen_math},
+		 #if defined _DEBUG
+		 {LUA_DBLIBNAME,		luaopen_debug},
+		 #endif
+		 {NULL, NULL}
+		 };
 
-			const luaL_Reg* pos = loadedlibs;
-			for(; pos->name; ++pos) 
-			{
-				luaL_requiref(L, pos->name, pos->func, 1);
-				lua_pop(L, 1);
-			}
+		 const luaL_Reg* pos = loadedlibs;
+		 for(; pos->name; ++pos) 
+		 {
+		 luaL_requiref(L, pos->name, pos->func, 1);
+		 lua_pop(L, 1);
+		 }*/
+		luaL_openlibs(m_pLua);
 		}	
 
 		ScriptExporterManager().ExportModule("exporterManager", *this);

@@ -6,7 +6,7 @@
 
 class CClassA
 {
-	DECLARE_SCRIPT_CLASS();
+	//DECLARE_SCRIPT_CLASS();
 public:
 	virtual void Say()
 	{
@@ -21,7 +21,7 @@ public:
 
 class CClassB : public CClassA
 {
-	DECLARE_SCRIPT_SUB_CLASS(CClassA);
+	DECLARE_SCRIPT_CLASS();
 public:
 	virtual void Say()
 	{
@@ -31,37 +31,47 @@ public:
 
 namespace bin
 {
-	BEGIN_SCRIPT_CLASS(ClassA, CClassA)
-		DEFINE_CLASS_FUNCTION(say, void, ())
-		{
-			obj->Say();
-			return 1;
-		}
+	//BEGIN_SCRIPT_CLASS(ClassA, CClassA)
+	//	DEFINE_CLASS_FUNCTION(say, void, ())
+	//	{
+	//		obj->Say();
+	//		return 1;
+	//	}
 
-		DEFINE_CLASS_FUNCTION(func, void, ())
-		{
-			obj->Func();
-			return 1;
-		}
+	//	DEFINE_CLASS_FUNCTION(func, void, ())
+	//	{
+	//		obj->Func();
+	//		return 1;
+	//	}
 
-		DEFINE_STATIC_FUNCTION(newInstance, CClassA*, ())
-		{
-			r = new CClassA;
-			r->GetScriptObject().SetDelByScr(true);
+	//	DEFINE_STATIC_FUNCTION(newInstance, CClassA*, ())
+	//	{
+	//		r = new CClassA;
+	//		r->GetScriptObject().SetDelByScr(true);
 
-			return 1;
-		}
-	END_SCRIPT_CLASS()
+	//		return 1;
+	//	}
+	//END_SCRIPT_CLASS()
 
 	BEGIN_SCRIPT_CLASS(ClassB, CClassB)
 		SUPER_CLASS(ClassA, CClassA)
 		DEFINE_STATIC_FUNCTION(newInstance, CClassB*, ())
-		{
-			r = new CClassB;
-			r->GetScriptObject().SetDelByScr(true);
+	{
+		r = new CClassB;
+		r->GetScriptObject().SetDelByScr(true);
 
-			return 1;
-		}
+		return 1;
+	}
+	DEFINE_CLASS_FUNCTION(say, void, ())
+	{
+		obj->Say();
+		return 1;
+	}
+	DEFINE_CLASS_FUNCTION(func, void, ())
+	{
+		obj->Func();
+		return 1;
+	}
 	END_SCRIPT_CLASS()
 }
 
@@ -73,12 +83,20 @@ void CExample_Inheritance::Do()
 	bin::ScriptExporterManager().ExportClass("ClassA", luaHandle);
 	bin::ScriptExporterManager().ExportClass("ClassB", luaHandle);
 
-	luaHandle.ExecString(	"local objA = bin_types.ClassA.newInstance();\n" 
-							"objA:say();\n"
-							"local objB = bin_types.ClassB.newInstance();\n"
+	luaHandle.ExecString("local objB = bin_types.ClassB.newInstance();\n"
 							"objB:say();\n"
 							"objB:func()"
 						);
+
+/*
+
+	luaHandle.ExecString(	"local objA = bin_types.ClassA.newInstance();\n" 
+		"objA:say();\n"
+		"local objB = bin_types.ClassB.newInstance();\n"
+		"objB:say();\n"
+		"objB:func()"
+		);*/
+	return ;
 }
 
 REGISTE_EXAMPLE(CExample_Inheritance);

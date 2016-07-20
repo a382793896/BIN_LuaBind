@@ -11,15 +11,15 @@ namespace bin
 	static const char* SCRIPT_REFS		= "__bin_refs";
 	static const char* SCRIPT_TYPES		= "__bin_types";
 
-	extern void LOG_MESSAGE(const char* pszFmt, ...);
+	LUA_BIND_API extern void LOG_MESSAGE(const char* pszFmt, ...);
 
-	class INonCopyable 
+	class LUA_BIND_API INonCopyable 
 	{
 	public:
 		INonCopyable(){}
 
-		INonCopyable(INonCopyable&);
-		INonCopyable& operator = (INonCopyable&);
+		//INonCopyable(INonCopyable&);
+		//INonCopyable& operator = (INonCopyable&);
 	};
 
 	struct SCheckLuaStack
@@ -178,7 +178,7 @@ namespace bin
 	{
 		static int Make(const std::string& a, lua_State* pL)
 		{
-			lua_pushstring(pL, a.c_str());
+			lua_pushlstring(pL, a.c_str(),a.size());
 
 			return 1;
 		}
@@ -298,9 +298,9 @@ namespace bin
 			{
 				return 0;
 			}
-
-			str = lua_tostring(pL, nIdx);
-
+			size_t len = 0;
+			const char * pchar = lua_tolstring(pL, nIdx,&len);
+			str.assign(pchar,len);
 			return 1;
 		}
 	};

@@ -73,7 +73,7 @@ namespace bin
 	class CScriptUserData;
 
 	//! Encapsulate a lua_State, provide global setting and reading interface
-	class CScriptHandle : INonCopyable
+	class LUA_BIND_API CScriptHandle : INonCopyable
 	{
 	public:
 		CScriptHandle()
@@ -435,7 +435,7 @@ OPERATION_FAIL:
 
 	// Script abstract data base : abstract data means table and user data type
 	// It's internal used, Never work with a table or userdata with this parent class 
-	class IScriptADBase : INonCopyable
+	class LUA_BIND_API IScriptADBase : INonCopyable
 	{
 	protected:
 		struct SRefNode : SScriptHandleRefNode
@@ -776,7 +776,7 @@ OPERATION_FAIL:
 	};
 
 	//! Encapsulate a lua table.
-	class CScriptTable : public IScriptADBase
+	class LUA_BIND_API CScriptTable : public IScriptADBase
 	{
 	public:
 		CScriptTable()
@@ -892,7 +892,7 @@ OPERATION_FAIL:
 	};
 
 	//! Encapsulate a lua userdata.
-	class CScriptUserData : public IScriptADBase
+	class LUA_BIND_API CScriptUserData : public IScriptADBase
 	{
 	public:
 		CScriptUserData()

@@ -25,7 +25,7 @@ namespace bin
 		}
 	};
 		
-	class IScriptExporter
+	class LUA_BIND_API IScriptExporter
 	{
 	public:
 		virtual ~IScriptExporter(){}
@@ -33,7 +33,7 @@ namespace bin
 		virtual SExporterInfo GetInfo() const = 0;
 	};
 
-	class CScriptExporterManager
+	class LUA_BIND_API CScriptExporterManager
 	{
 	public:
 		typedef stdext::hash_map<std::string, IScriptExporter*>	ScriptExporters;
@@ -337,7 +337,7 @@ namespace bin
 	typedef TLinkNode<SModuleFunction> ModuleFunctionLinkNode;
 	typedef TLinkNode<SClassFunction>  ClassFunctionLinkNode;
 
-	class CModuleExporter : public IScriptExporter
+	class LUA_BIND_API CModuleExporter : public IScriptExporter
 	{
 	public:
 		CModuleExporter(const char* pszName, ModuleFunctionLinkNode** ppHead)
@@ -439,7 +439,7 @@ namespace bin
 		ModuleFunctionLinkNode**	m_ppHead;
 	};
 
-	class CClassExporter : public IScriptExporter
+	class LUA_BIND_API CClassExporter : public IScriptExporter
 	{
 	public:
 		CClassExporter(const char* pszSuper, const char* pszName, ClassFunctionLinkNode** ppHead)
